@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Patient Medicines</h3>
+        </div>
+
+
+        <div class="card-body">
+
+            <div class="print-area">
+
+                <!-- Patient Details -->
+                {% if patient %}
+                <div class="row mb-4 print-header">
+                    <div class="col-md-6">
+                        <h6><strong>Patient ID :</strong> {{ patient.id }}</h6>
+                        <h6><strong>Patient Name :</strong> {{ patient.patient_name }}</h6>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Medicine Table -->
+                <div class="table-responsive">
+                    <table class="table table-bordered text-center align-middle">
+
+                        <thead class="table-dark">
+                            <tr>
+                                <th>S.No</th>
+                                <th>Medicine Name</th>
+                                <th>Quantity</th>
+                                <th>Unit Price</th>
+                                <th>Price</th>
+                                <th class="no-print">Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for medicine in medicines %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ medicine.drug.name }}</td>
+                                <td>{{ medicine.quantity }}</td>
+                                <td>{{ medicine.unit_price }}</td>
+                                <td>₹{{ medicine.medicine_total }}</td>
+
+                                <td class="no-print">
+                                    <a href="{% url 'patient_medicine_update' medicine.id %}"
+                                       class="btn btn-warning btn-sm">
+                                        Edit
+                                    </a>
+
+                                    <a href="{% url 'patient_medicine_delete' medicine.id %}"
+                                       class="btn btn-danger btn-sm">
+                                        Delete
+                                    </a>
+
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5">No Medicine Found</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col text-end">
+                        <h6>
+                            <strong>Grand Total : ₹{{ grand_total }}</strong>
+                        </h6>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="text-center mt-3 no-print">
+
+                    <a href="{% url 'patient_medicine' patient.id %}" class="btn btn-success">
+                        Add Medicine
+                    </a>
+                    <button onclick="window.print()" class="btn btn-info">
+                        Print
+                    </button>
+
+                    <a href="{% url 'dashboard' %}" class="btn btn-secondary">
+                        Back
+                    </a>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

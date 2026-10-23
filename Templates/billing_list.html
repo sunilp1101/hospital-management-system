@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white text-center">
+                 <h4 class="mb-0">Bill's</h4>
+                </div>
+
+               <div class="card-body">
+
+                   <div class="table-responsive">
+
+                       <table class="table table-hover table-bordered align-middle text-center">
+
+                          <thead class="table-dark">
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Patient</th>
+                                  <th>Doctor</th>
+                                  <th>Total</th>
+                                  <th>Payment</th>
+                                  <th>Date</th>
+                                  <th>Pharmacy</th>
+                                  <th>Invoice</th>
+                                  <th>Actions</th>
+                              </tr>
+                          </thead>
+
+                         <tbody>
+                             {% for billing in billings  %}
+                             <tr>
+                                 <td>{{ billing.id }}</td>
+                                 <td>{{ billing.patient }}</td>
+                                 <td>{{ billing.doctor }}</td>
+                                 <td>{{ billing.total_amount }}</td>
+                                 <td>{{ billing.payment_method }}</td>
+                                 <td>{{ billing.billing_date }}</td>
+                                 <td>
+                                     <a href="{% url 'patient_medicine_list' billing.patient.id %}"
+                                        class="btn btn-primary btn-sm">
+                                         View
+                                     </a>
+                                 </td>
+                                 <td>
+                                     <a href="{% url 'invoice_detail' billing.id %}" class="btn btn-info btn-sm">View</a>
+                                 </td>
+                                 <td>
+                                    <a href="{% url 'billing_update' billing.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="{% url 'billing_delete' billing.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                 </td>
+                             </tr>
+                             {% empty %}
+                             <tr>
+                                 <td colspan="7" class="text-center text-muted">No Bills found</td>
+                             </tr>
+                             {% endfor %}
+                         </tbody>
+                       </table>
+                   </div>
+               </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="/billing_create/" class="btn btn-success">Add Bill</a>
+
+                <a href="/dashboard/" class="btn btn-secondary">Back</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Hospital Services</title>
+
+    <style>
+        body{
+            background-image: url("{% static 'images/hospi.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding-top: 60px;
+        }
+
+        form p label{
+            font-weight: bold;
+        }
+
+        textarea.form-control{
+            height: auto;
+        }
+        label{
+            font-weight: bold;
+        }
+
+        .print-header{
+            display: none;
+        }
+
+        @media print {
+             .print-header{
+                display: block !important;
+             }
+
+             #main-navbar,
+            .offcanvas,
+            .navbar-toggler,
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                background-image: none !important;
+                padding-top: 0 !important;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+<nav id="main-navbar" class="navbar navbar-dark bg-primary fixed-top">
+    <div class="container-fluid">
+
+
+        <a class="navbar-brand" href="{% url 'home' %}">
+            🏥 Hospital
+        </a>
+
+
+        <div class="d-flex align-items-center">
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'logout' %}" class="logout-icon btn btn-warning btn-sm me-2 no-print">
+                    <i class="fa fa-sign-out"></i>Logout
+                </a>
+            {% endif %}
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasDarkNavbar"
+                    aria-controls="offcanvasDarkNavbar"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </div>
+
+
+        <div class="offcanvas offcanvas-end text-bg-dark"
+             tabindex="-1"
+             id="offcanvasDarkNavbar">
+
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title">☰</h5>
+
+                <button type="button"
+                        class="btn-close btn-close-white"
+                        data-bs-dismiss="offcanvas">
+                </button>
+            </div>
+
+            <div class="offcanvas-body bg-primary">
+
+                <ul class="navbar-nav">
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}">
+                            🏠 Home
+                        </a>
+                    </li>
+
+                    {% if user.is_authenticated %}
+
+                        <li class="nav-item">
+                            <span class="nav-link text-warning">
+                                👋 Welcome, {{ user.username }}
+                            </span>
+                        </li>
+
+                    {% else %}
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               role="button"
+                               data-bs-toggle="dropdown">
+
+                                Login
+
+                            </a>
+
+                            <ul class="dropdown-menu dropdown-menu-dark">
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'register' %}">
+                                        Sign Up
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="{% url 'login' %}">
+                                        Sign In
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                    {% endif %}
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+</nav>
+
+<div class="container mt-4">
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

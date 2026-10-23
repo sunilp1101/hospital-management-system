@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-primary text-white text-center">
+            <h3 class="mb-0">Appointment Details</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered table-hover text-center align-middle">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th>Patient Name</th>
+                                <th>Doctor Name</th>
+                                <th>Specialization</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+
+                                <td>{{ appointment.patient.patient_name }}</td>
+
+                                <td>{{ appointment.doctor.doctor_name }}</td>
+
+                                <td>{{ appointment.doctor.doctor_specialization }}</td>
+
+                                <td>{{ appointment.appointment_date }}</td>
+
+                                <td>{{ appointment.appointment_time }}</td>
+                                <td>
+                                    <select name="appointment_method"
+                                            class="form-select">
+
+                                        <option value="Online"
+                                        {% if appointment.appointment_method == "online" %}
+                                        selected
+                                        {% endif %}>
+                                            Online
+                                        </option>
+
+                                        <option value="Offline"
+                                        {% if appointment.appointment_method == "offline" %}
+                                        selected
+                                        {% endif %}>
+                                            Offline
+                                        </option>
+                                    </select>
+                                </td>
+
+
+
+                                <td>
+
+                                    <select name="appointment_status"
+                                            class="form-select">
+
+                                        <option value="pending"
+                                        {% if appointment.appointment_status == "pending" %}
+                                        selected
+                                        {% endif %}>
+                                            Pending
+                                        </option>
+
+                                        <option value="completed"
+                                        {% if appointment.appointment_status == "completed" %}
+                                        selected
+                                        {% endif %}>
+                                            Completed
+                                        </option>
+
+                                        <option value="cancelled"
+                                        {% if appointment.appointment_status == "cancelled" %}
+                                        selected
+                                        {% endif %}>
+                                            Cancelled
+                                        </option>
+
+                                    </select>
+
+                                </td>
+
+                                <td>
+
+                                    <a href="{% url 'appointment_delete' appointment.pk %}"
+                                       class="btn btn-danger btn-sm">
+                                        Delete
+                                    </a>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="text-center mt-3">
+
+                    <button type="submit" class="btn btn-primary px-4">Save</button>
+
+                    <a href="{% url 'appointment_list' %}" class="btn btn-secondary px-4">Back</a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

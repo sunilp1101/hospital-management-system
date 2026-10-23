@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white text-center">
+                 <h4 class="mb-0">Update Doctor</h4>
+                </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="table-responsive">
+
+                       <table class="table table-hover table-bordered align-middle text-center">
+
+                          <thead class="table-dark">
+                              <tr>
+                                  <th>Doctor Title</th>
+                                  <th>Doctor Name</th>
+                                  <th>Doctor Specialization</th>
+                                  <th>Doctor Phone</th>
+                                  <th>Doctor Email</th>
+                              </tr>
+                          </thead>
+
+                           <tbody>
+                             <tr>
+                                 <td>{{ form.doctor_title }}</td>
+                                 <td>{{ form.doctor_name }}</td>
+                                 <td>{{ form.doctor_specialization }}</td>
+                                 <td>{{ form.doctor_phone }}</td>
+                                 <td>{{ form.doctor_email }}</td>
+                             </tr>
+                           </tbody>
+                       </table>
+                    </div>
+
+
+
+
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success px-4">Update</button>
+
+
+
+                        <a href="/doctor_list/" class="btn btn-secondary px-4">Back</a>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+    </div>
+
+</div>
+
+{% endblock %}

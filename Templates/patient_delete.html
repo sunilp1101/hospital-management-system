@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5 col-lg-4">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-danger text-white text-center">
+                    <h4 class="mb-0">Delete Patient</h4>
+                </div>
+
+                <div class="card-body text-center">
+
+                    <h6>
+                        Are you sure you want to delete
+                        <strong>{{ patient.patient_name }}</strong> ?
+                    </h6>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <button type="submit"
+                                class="btn btn-danger">
+                            Delete
+                        </button>
+
+                        <a href="{% url 'patient_list' %}"
+                           class="btn btn-secondary">
+                            Cancel
+                        </a>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

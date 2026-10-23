@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5 mb-5">
+
+    <div class="card shadow-lg border-0">
+
+
+        <div class="card-header bg-primary text-white text-center py-4">
+            <h2>🏥 Hospital Management System</h2>
+            <p class="mb-0">Patient Invoice</p>
+        </div>
+
+        <div class="card-body">
+
+
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+                    <h5><strong>Invoice Number :</strong> {{ invoice.invoice_number }}</h5>
+                    <h5><strong>Invoice Date :</strong> {{ invoice.invoice_date }}</h5>
+                </div>
+
+                <div class="col-md-6 text-md-end">
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <th class="text-end">Payment Method :</th>
+                            <td>{{ billing.payment_method }}</td>
+                        </tr>
+
+                        <tr>
+                            <th class="text-end">Payment Status :</th>
+                            <td>
+                                {% if billing.payment_status == 'Paid' %}
+                                    <span class="badge bg-success">Paid</span>
+                                {% else %}
+                                    <span class="badge bg-warning text-dark">Pending</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+
+            <hr>
+
+
+            <div class="row">
+
+                <!-- Patient -->
+                <div class="col-md-6">
+
+                    <h4 class="text-primary mb-3">Patient</h4>
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <th width="30%">Patient</th>
+                            <td>
+                                {{ invoice.billing.patient.patient_title }}
+                                {{ invoice.billing.patient.patient_name }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Age</th>
+                            <td>{{ invoice.billing.patient.patient_age }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Gender</th>
+                            <td>{{ invoice.billing.patient.patient_gender }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Phone</th>
+                            <td>{{ invoice.billing.patient.patient_phone }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Address</th>
+                            <td>{{ invoice.billing.patient.patient_address }}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+
+                <div class="col-md-6">
+
+                    <h4 class="text-primary mb-3">Doctor</h4>
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <th width="40%">Doctor</th>
+                            <td>
+                                {{ invoice.billing.doctor.doctor_title }}
+                                {{ invoice.billing.doctor.doctor_name }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th>Department</th>
+                            <td>{{ invoice.billing.doctor.doctor_specialization }}</td>
+                        </tr>
+
+                        <tr>
+                            <th>Billing Date</th>
+                            <td>{{ invoice.billing.billing_date }}</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <hr>
+
+
+            <h3 class="text-center mb-3">
+                Bill Details
+            </h3>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th width="10%">#</th>
+                        <th>Description</th>
+                        <th class="text-end">Amount (₹)</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>1</td>
+                        <td>Consultation Fee</td>
+                        <td class="text-end">
+                            ₹ {{ invoice.billing.consultation_fee }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2</td>
+                        <td>Medicine Charges</td>
+                        <td class="text-end">
+                            ₹ {{ invoice.billing.medicine_fee }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3</td>
+                        <td>Laboratory Charges</td>
+                        <td class="text-end">
+                            ₹ {{ invoice.billing.lab_fee }}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>4</td>
+                        <td>Other Charges</td>
+                        <td class="text-end">
+                            ₹ {{ invoice.billing.other_fee }}
+                        </td>
+                    </tr>
+
+                </tbody>
+
+                <tfoot>
+
+                    <tr class="table-success">
+
+                        <th colspan="2" class="text-end">
+                            Total Amount
+                        </th>
+
+                        <th class="text-end">
+                            ₹ {{ invoice.billing.total_amount }}
+                        </th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+            <hr>
+
+            <!-- Footer -->
+            <div class="text-center mt-4">
+
+                <h5>Thank You for Visiting Our Hospital</h5>
+
+
+
+            </div>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="card-footer text-center">
+
+            <button onclick="window.print()" class="btn btn-success">
+                 Print Invoice
+            </button>
+
+            <a href="{% url 'billing_list' %}" class="btn btn-secondary">
+                ← Back to Billing
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

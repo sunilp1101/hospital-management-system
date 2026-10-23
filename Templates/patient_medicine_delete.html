@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-5 col-lg-4">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-danger text-white text-center">
+                    <h4 class="mb-0">Delete Medicine</h4>
+                </div>
+
+                <div class="card-body text-center">
+                    <p class="mb-4">
+                        Are you sure you want to delete
+                        <strong>{{ medicine.drug.name }}</strong>
+                        for
+                        <strong>{{ medicine.patient.patient_name }}</strong>
+                    </p>
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <button type="submit" class="btn btn-danger px-4">Delete</button>
+                        <a href="{% url 'patient_medicine_list' medicine.patient.id %}" class="btn btn-secondary">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

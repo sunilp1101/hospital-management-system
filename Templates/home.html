@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-fluid text-white text-center"
+     style="background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+     url('{% static "images/hospi.jpg" %}');
+     background-size:cover;
+     background-position:center;
+     height:600px;">
+
+    <div class="pt-5">
+
+        <h3 class="display-3 fw-bold mt-5 p-5">
+            🏥 Hospital Management System
+        </h3>
+
+        <p class="lead mt-4">
+            Welcome to our Hospital Management System.
+            This platform helps hospitals efficiently manage
+            patients, doctors, appointments, billing, medical
+            records and healthcare services from a single dashboard.
+        </p>
+
+        <!-- Buttons -->
+        <div class="mt-4">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'dashboard' %}" class="btn btn-success btn-lg me-3">
+                    Dashboard
+                </a>
+
+
+
+            {% else %}
+
+                <a href="{% url 'patient_register' %}" class="btn btn-success btn-lg me-3">
+                    Book Appointment
+                </a>
+
+                <a href="{% url 'login' %}" class="btn btn-primary btn-lg">
+                    Staff Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- About Our Hospital -->
+
+<div class="container my-5">
+
+    <div class="text-center">
+        <h2 class="text-warning mb-4">About Our Hospital</h2>
+
+        <p class="text-light fs-5">
+            Our Hospital Management System is designed to improve
+            healthcare services by providing a centralized platform
+            for patient care, doctor management, appointment scheduling,
+            pharmacy management and billing operations.
+        </p>
+    </div>
+
+</div>
+
+<!-- Services Section -->
+
+<div class="container my-5">
+
+    <h2 class="text-center text-warning mb-5">
+        Hospital Services
+    </h2>
+
+    <div class="row text-center">
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h1>👨‍⚕️</h1>
+                    <h4>Doctors</h4>
+                    <p>Manage doctor profiles and schedules.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h1>🧑‍🤝‍🧑</h1>
+                    <h4>Patients</h4>
+                    <p>Maintain patient records and history.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h1>📅</h1>
+                    <h4>Appointments</h4>
+                    <p>Book and manage appointments easily.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card shadow h-100">
+                <div class="card-body">
+                    <h1>💊</h1>
+                    <h4>Pharmacy</h4>
+                    <p>Manage medicines and inventory.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Why Choose Us -->
+
+<div class="container my-5">
+
+    <div class="row">
+
+        <div class="col-md-4 text-center">
+            <h1>🏥</h1>
+            <h4>Quality Care</h4>
+            <p>Providing excellent healthcare services.</p>
+        </div>
+
+        <div class="col-md-4 text-center">
+            <h1>⏰</h1>
+            <h4>24/7 Service</h4>
+            <p>Available round the clock for emergencies.</p>
+        </div>
+
+        <div class="col-md-4 text-center">
+            <h1>❤️</h1>
+            <h4>Patient First</h4>
+            <p>Dedicated to patient satisfaction and safety.</p>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+         <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center">
+               <h3 class="mb-0">Billing Data</h3>
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover table-bordered align-middle text-center">
+
+                            <thead class="table-dark">
+
+                                <tr>
+                                    <th>Patient</th>
+                                    <th>Doctor</th>
+                                    <th>Consultation Fee</th>
+                                    <th>Medicine Fee</th>
+                                    <th>Lab Fee</th>
+                                    <th>Other Fee</th>
+                                    <th>Payment Method</th>
+                                    <th>Payment Status</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>{{ form.patient }}</td>
+                                    <td>{{ form.doctor }}</td>
+                                    <td>{{ form.consultation_fee }}</td>
+                                    <td>{{ form.medicine_fee }}</td>
+                                    <td>{{ form.lab_fee }}</td>
+                                    <td>{{ form.other_fee }}</td>
+                                    <td>{{ form.payment_method }}</td>
+                                    <td>{{ form.payment_status }}</td>
+                                </tr>
+                            </tbody>
+                         </table>
+                    </div>
+
+
+
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success px-4">Save</button>
+
+
+
+                        <a href="/billing_list/" class="btn btn-secondary px-4">Back</a>
+                    </div>
+                </form>
+
+
+            </div>
+
+        </div>
+
+
+
+</div>
+
+{% endblock %}
